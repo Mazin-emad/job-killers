@@ -20,7 +20,7 @@ defineProps({
 
 onMounted(() => {
   axios
-    .get("/api/jobs")
+    .get(`${import.meta.env.VITE_APP_API_URL}/jobs`)
     .then((response) => {
       state.jobs = response.data;
     })
@@ -58,7 +58,7 @@ onMounted(() => {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <JobListing
           v-for="job in state.jobs.slice(0, limit) || state.jobs"
-          :key="job.id"
+          :key="job._id"
           :job="job"
         />
       </div>

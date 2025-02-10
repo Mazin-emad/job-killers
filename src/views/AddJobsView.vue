@@ -46,9 +46,21 @@ const onSubmit = async () => {
   state.loading = true;
 
   try {
-    const res = await axios.post("/api/jobs", state.newJob);
+    // Convert phone number to a number type before sending
+    const jobData = {
+      ...state.newJob,
+      company: {
+        ...state.newJob.company,
+        contactPhone: Number(state.newJob.company.contactPhone.replace(/\D/g, ''))
+      }
+    };
+
+    const res = await axios.post(
+      `${import.meta.env.VITE_APP_API_URL}/jobs`,
+      jobData
+    );
     toast.success("Job added successfully");
-    router.push("/jobs/" + res.data.id);
+    router.push("/jobs/" + res.data._id);
   } catch (err) {
     console.log(err);
     toast.error("Error adding job, try again");

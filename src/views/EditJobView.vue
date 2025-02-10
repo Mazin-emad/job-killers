@@ -48,9 +48,12 @@ const onSubmit = async () => {
   state.loading = true;
 
   try {
-    const res = await axios.put("/api/jobs/" + route.params.id, state.newJob);
+    const res = await axios.put(
+      `${import.meta.env.VITE_APP_API_URL}/jobs/${route.params.id}`,
+      state.newJob
+    );
     toast.success("Job updated successfully");
-    router.push("/jobs/" + res.data.id);
+    router.push("/jobs/" + res.data._id);
   } catch (err) {
     console.log(err);
     toast.error("Error updating job, try again");
@@ -62,7 +65,7 @@ const onSubmit = async () => {
 onMounted(() => {
   state.loading = true;
   axios
-    .get("/api/jobs/" + route.params.id)
+    .get(`${import.meta.env.VITE_APP_API_URL}/jobs/${route.params.id}`)
     .then((response) => {
       state.newJob = response.data;
     })

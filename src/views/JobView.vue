@@ -18,7 +18,9 @@ const router = useRouter();
 const deleteJob = async () => {
   state.deleteLoading = true;
   try {
-    await axios.delete("/api/jobs/" + state.job.id);
+    await axios.delete(
+      `${import.meta.env.VITE_APP_API_URL}/jobs/${state.job._id}`
+    );
     toast.success("Job deleted successfully");
     router.push("/jobs");
   } catch (err) {
@@ -31,7 +33,7 @@ const deleteJob = async () => {
 
 onMounted(() => {
   axios
-    .get("/api/jobs/" + route.params.id)
+    .get(`${import.meta.env.VITE_APP_API_URL}/jobs/${route.params.id}`)
     .then((response) => {
       state.job = response.data;
     })
@@ -104,13 +106,13 @@ onMounted(() => {
 
             <h3 class="text-xl">Contact Email:</h3>
 
-            <p class="my-2 bg-green-100 p-2 font-bold">
+            <p class="my-2 bg-green-100 p-2 font-bold break-all">
               {{ state.job.company.contactEmail }}
             </p>
 
             <h3 class="text-xl">Contact Phone:</h3>
 
-            <p class="my-2 bg-green-100 p-2 font-bold">
+            <p class="my-2 bg-green-100 p-2 font-bold break-all">
               {{ state.job.company.contactPhone }}
             </p>
           </div>
@@ -119,7 +121,7 @@ onMounted(() => {
           <div class="bg-white p-6 rounded-lg shadow-md mt-6">
             <h3 class="text-xl font-bold mb-6">Manage Job</h3>
             <RouterLink
-              :to="`/jobs/edit/${state.job.id}`"
+              :to="`/jobs/edit/${state.job._id}`"
               class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >Edit Job</RouterLink
             >
