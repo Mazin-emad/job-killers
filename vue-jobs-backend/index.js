@@ -5,7 +5,14 @@ const app = express();
 const cors = require("cors");
 const jobRoutes = require("./routes/jobRoutes.js");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://job-killers.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/jobs", jobRoutes);
