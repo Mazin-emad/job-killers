@@ -10,7 +10,7 @@ import Card from "./Card.vue";
         <Card bg="bg-gray-100">
           <h2 class="text-2xl font-bold">For Developers</h2>
           <p class="mt-2 mb-4">
-            Browse our Vue jobs and start your career today
+            Browse our Dev jobs and start your career today
           </p>
           <RouterLink
             to="/jobs"
