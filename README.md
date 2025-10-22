@@ -30,3 +30,5 @@ npm install
 ```bash
 npm run dev
 ```
+
+# updating for deploy
